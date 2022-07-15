@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp1eezv271x2qwencao.mysql.rds.aliyuncs.com:3306
+    username: gxk
+    password: Gxk19990805
+  redis:
+    timeout: 5000
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://danpukj.com:3306
+#    username: oa_danpukj_com
+#    password: RaC8HPFiKciNkiyL
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8080
+
+forest:
+  ## 日志总开关，打开/关闭Forest请求/响应日志（默认为 true）
+  log-enabled: false
+  ## 打开/关闭Forest请求日志（默认为 true）
+  log-request: false
+  ## 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-status: false
+  ## 打开/关闭Forest响应内容日志（默认为 false）
+  log-response-content: false
+  ##错误拦截器
+  interceptors: com.abocidee.newdemo.ErrorInterceptor
+  timeout: 10000

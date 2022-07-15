@@ -1,0 +1,7 @@
+{"head":[{"content":"用户ID","key":"user_id"},
+{"content":"用户名","key":"user_name"},{"content":"答题量","key":"page_count"},
+{"content":"框","key":"rect"},{"content":"图像矩形框","key":"imageRect"},
+{"content":"预估礼券","key":"score"}],"headsMap":{"rect":0,"imageBox":0,"name":
+{"rect":"框","imageBox":"图像立体框","imageRect":"图像矩形框"},"imageRect":0,"count":{"rec
+t":299,"imageRect":50}},"records":[{"score":747,"rect":299,"imageBox":0,"user_id":"22449283",
+"user_name":"旅途2刘秀娟","mark_id":"6540809","imageRect":50,"page_count":1}],"record_num":1}
