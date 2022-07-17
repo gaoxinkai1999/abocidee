@@ -3,8 +3,10 @@
     <h1>一键转会</h1>
     <br><br><br><br><br><br><br><br>
     <el-row>
-      <el-button v-for="union in unions" :key="union" type="info" @click="move(union)">{{ union }}</el-button>
+      <el-button v-for="union in unions" :key="union" type="info" @click="move(union,false)">{{ union }}</el-button>
     </el-row>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <el-button type="" @click="move(null,true)">只退会</el-button>
   </div>
 </template>
 
@@ -17,16 +19,17 @@ export default {
     }
   },
   methods: {
-    move(union) {
+    move(union, onlyexit) {
       this.$http({
-        url: 'zhuanhui',
+        url: '/action/move',
         method: 'get',
         params: {
-          'unionname': union
+          'unionname': union,
+          'onlyexit': onlyexit
         }
       }).then(res => {
-        if (res.data.msg === 'fail') {
-          this.error(res.data.text)
+        if (res.data.code === 1) {
+          this.error(res.data.msg)
         } else {
           this.success()
         }
@@ -35,10 +38,10 @@ export default {
   },
   created() {
     this.$http({
-      url: 'getunion',
+      url: '/union/getAll',
       method: 'get'
     }).then(res => {
-      this.unions = res.data.unions
+      this.unions = res.data.data
     })
   }
 }

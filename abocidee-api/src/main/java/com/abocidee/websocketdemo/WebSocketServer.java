@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 作用相当于HTTP请求
  * 中的controller
  */
-@Component
+//@Component
 @Slf4j
 @ServerEndpoint("/api/pushMessage/{username}")
 public class WebSocketServer {

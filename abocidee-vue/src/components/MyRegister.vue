@@ -51,9 +51,7 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-        if (res.data.msg === 'fail') {
-          this.error(res.data.text)
-        } else {
+        if (res.data.code === 0) {
           this.$emit('username', res.data.username)
         }
       })

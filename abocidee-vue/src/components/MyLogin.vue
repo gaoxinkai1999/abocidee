@@ -22,7 +22,7 @@ export default {
     login() {
       console.log('登录中')
       this.$http({
-        url: '/登录',
+        url: '/user/login',
         method: 'get',
         params: {
           'username': this.username
@@ -30,10 +30,10 @@ export default {
 
       }).then(res => {
         console.log(res)
-        if (res.data.msg === 'fail') {
-          this.error(res.data.text)
-        } else {
+        if (res.data.code === 0) {
           this.$emit('username', this.username)
+        } else {
+          this.error(res.data.msg)
         }
       })
     }

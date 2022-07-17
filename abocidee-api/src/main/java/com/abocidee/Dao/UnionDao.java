@@ -1,6 +1,8 @@
 package com.abocidee.Dao;
 
 import com.abocidee.Domain.Union;
+import com.abocidee.Domain.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,4 +19,7 @@ public interface UnionDao {
 
     @Update("update abocidee.`union` set cookie=#{cookie} where unionname=#{unionname}")
     public void setCookie(String unionname, String cookie);
+
+    @Insert("insert into abocidee.`union` values (#{unionname},#{cookie},#{unionid},#{token})")
+    void add(Union union);
 }

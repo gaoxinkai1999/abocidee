@@ -43,24 +43,16 @@ export default {
   },
   created() {
     this.$http({
-      url: '/xxx',
+      url: '/user/check',
       method: 'get'
 
     }).then(res => {
-      if (res.data == null) {
-
-      } else {
-        this.username = res.data
+      if (res.data.code === 0) {
+        this.username = res.data.data.username
       }
     })
   },
   methods: {
-    async getuserstate() {
-      var data = (await this.$http.get('/xxx')).data
-      if (data != null) {
-        this.username = data
-      }
-    },
     getusername(val) {
       this.username = val
     },

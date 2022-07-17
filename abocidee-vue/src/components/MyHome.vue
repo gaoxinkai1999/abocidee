@@ -45,6 +45,7 @@ export default {
   components: {
     SetCookie
   },
+  // 在keepalive下保持数据更新
   activated() {
     console.log('渲染中')
   }

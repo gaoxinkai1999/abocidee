@@ -1,4 +1,4 @@
-package com.abocidee.newdemo.tools;
+package com.abocidee.servlet.tools;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

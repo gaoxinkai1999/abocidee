@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MyHome from '../components/MyHome'
 import MyMove from '../components/MyMove'
 import MySelect from '../components/MySelect'
+import MyManage from '../components/MyManage'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/3',
       name: 'MySelect',
       component: MySelect
+    },
+    {
+      path: '/4',
+      name: 'MyManage',
+      component: MyManage
     }
 
   ]

@@ -10,8 +10,9 @@ import {error, success} from './until'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-// axios.defaults.baseURL = 'http://124.223.48.47:8080'
-axios.defaults.baseURL = 'http://localhost:8080'
+
+axios.defaults.baseURL = 'http://124.223.48.47:8080'
+// axios.defaults.baseURL = 'http://localhost:8080'
 axios.defaults.withCredentials = true // 让ajax携带cookie
 Vue.prototype.$http = axios
 Vue.prototype.success = success
@@ -51,6 +52,8 @@ axios.interceptors.request.use(request => {
 // 接收响应拦截器
 axios.interceptors.response.use(response => {
   endLoading()
+  console.log(response.data)
+
   return response
 }, err => {
   endLoading()

@@ -1,4 +1,4 @@
-package com.abocidee.newdemo.tools;
+package com.abocidee.servlet.tools;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.annotation.DecompressGzip;
@@ -70,5 +70,24 @@ public interface MyClient {
                     "Cookie:BDUSS={1}"}
     )
     Future<JSONObject> asyncget(String url, String cookie);
+
+
+    @Post(
+            url = "{0}",
+            headers = {"Accept:text/plain",
+                    "Cookie: YII_CSRF_TOKEN=9e22c8bb046e2dd4fe7c44c729c7cf3a12444703;BDUSS={1}; BDUSS_BFESS={1};"},
+            dataType = "json",
+            data = "{2}"
+    )
+    String demopost(String url, String cookie, String data);
+
+    @Request(
+            url = "{0}",
+            dataType = "json",
+            headers = {"Accept: text/plain",
+
+                    }
+    )
+    JSONObject get(String url);
 
 }

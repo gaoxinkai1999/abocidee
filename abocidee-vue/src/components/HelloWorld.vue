@@ -9,6 +9,7 @@
     <el-menu-item index="1" style="width: 200px">主页</el-menu-item>
     <el-menu-item index="2" style="width: 200px">一键转会</el-menu-item>
     <el-menu-item index="3" style="width: 200px">查询审核包</el-menu-item>
+    <el-menu-item index="4" style="width: 200px">管理员</el-menu-item>
   </el-menu>
 
 </template>
@@ -24,7 +25,6 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
     }
 
   }

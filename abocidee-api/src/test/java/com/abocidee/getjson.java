@@ -1,8 +1,8 @@
 package com.abocidee;
 
 import com.abocidee.Domain.User;
-import com.abocidee.newdemo.tools.MyClient;
-import com.abocidee.newdemo.tools.urls;
+import com.abocidee.servlet.tools.MyClient;
+import com.abocidee.servlet.tools.urls;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

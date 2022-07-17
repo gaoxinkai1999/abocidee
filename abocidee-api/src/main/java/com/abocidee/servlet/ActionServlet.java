@@ -1,15 +1,17 @@
-package com.abocidee.newdemo;
+package com.abocidee.servlet;
 
 import com.abocidee.Dao.UnionDao;
 import com.abocidee.Dao.UserDao;
 import com.abocidee.Dao.tongjiDao;
 import com.abocidee.Domain.Union;
 import com.abocidee.Domain.User;
-import com.abocidee.newdemo.tools.MyClient;
-import com.abocidee.newdemo.tools.urls;
+import com.abocidee.servlet.tools.MyClient;
+import com.abocidee.servlet.tools.MyError;
+import com.abocidee.servlet.tools.MyJson;
+import com.abocidee.servlet.tools.urls;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dtflys.forest.exceptions.ForestHandlerException;
+import com.dtflys.forest.exceptions.ForestNetworkException;
 import com.dtflys.forest.exceptions.ForestRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import java.util.HashMap;
 
 @Slf4j
 @Component
-public class Servlet {
+public class ActionServlet {
     @Autowired
     private MyClient myClient;
     @Autowired
@@ -30,94 +32,75 @@ public class Servlet {
     @Autowired
     private tongjiDao tongjiDao;
 
-    public JSONObject move(String username, String 目标公会name) {
-        //准备响应json
-        JSONObject jsonObject = new JSONObject();
+    public MyJson move(String username, String 目标公会name,Boolean onlyexit) {
         try {
 //            用户执行阶段
-
             //获取当前用户实例
             User user = userDao.get(username);
-//        System.out.println(user.getCookie());
-
             //获取用户当前公会
             JSONObject 用户信息 = myClient.get(urls.用户信息url(), user.getCookie());
-
-
-//        System.out.println("用户信息" + 用户信息.toString());
             String unionName = 用户信息.getString("unionName");
-
-
+            log.info("当前公会:" + unionName);
             //如果当前没有公会
             if (unionName.equals("")) {
+                if (onlyexit){
+                    return MyJson.success();
+                }
                 //执行进入公会
+                log.info("执行进入公会");
                 String token = unionDao.get(目标公会name).getToken();
                 JSONObject post = myClient.post(urls.进入公会url(token), user.getCookie(), "YII_CSRF_TOKEN=9e22c8bb046e2dd4fe7c44c729c7cf3a12444703");
-                jsonObject.put("result", "success");
-                jsonObject.put("msg","转会成功");
                 tongjiDao.update("退会");
-                return jsonObject;
+                return MyJson.success();
             } else {
                 //如果当前有公会
-
                 Union union = unionDao.get(unionName);
                 if (union == null) {
-                    jsonObject.put("result", "fail");
-                    return jsonObject;
+                    return MyJson.error(MyError.当前公会未接入);
                 } else {
                     //执行申请退会
+                    log.info("执行申请退会");
                     String data = "union_id=" + union.getUnionid() + "&exitReason%5B%5D=3&YII_CSRF_TOKEN=9e22c8bb046e2dd4fe7c44c729c7cf3a12444703";
                     JSONObject post = myClient.post(urls.申请退会url(), user.getCookie(), data);
                     //执行批准退会
+                    log.info("执行批准退会");
                     String data1 = "union_id=" + union.getUnionid() + "&user_id=" + user.getUserid() + "&op=allowExit&YII_CSRF_TOKEN=9e22c8bb046e2dd4fe7c44c729c7cf3a12444703";
                     try {
                         JSONObject post1 = myClient.post(urls.批准退会url(), union.getCookie(), data1);
-                    } catch (ForestHandlerException exception) {
+                    } catch (ForestNetworkException ex) {
                         //接收公会cookie错误异常
-                        jsonObject.put("result", "fail");
-                        jsonObject.put("msg", "公会cookie失效,请联系作者");
-                        return jsonObject;
+                        log.error(ex.getMessage());
+                        return MyJson.error(MyError.公会cookie失效);
                     }
-
+                    if (onlyexit){
+                        return MyJson.success();
+                    }
                     //执行进入公会
+                    log.info("执行进入公会");
                     String token = unionDao.get(目标公会name).getToken();
                     JSONObject post1 = myClient.post(urls.进入公会url(token), user.getCookie(), "YII_CSRF_TOKEN=9e22c8bb046e2dd4fe7c44c729c7cf3a12444703");
-                    jsonObject.put("result", "success");
-                    tongjiDao.update("退会");
-                    return jsonObject;
+                    return MyJson.success();
 
                 }
 
             }
 
-        } catch (ForestHandlerException ex) {
-            //接收cookie错误异常
-            log.error(ex.toString());
-            String msg="用户cookie失效";
-            log.error(msg);
-            jsonObject.put("result", "fail");
-            jsonObject.put("msg", msg);
-            return jsonObject;
+        } catch (ForestNetworkException ex) {
+            //用户cookie错误异常
+            log.error(ex.getMessage());
+            return MyJson.error(MyError.用户cookie失效);
         } catch (ForestRuntimeException ex) {
             //接收请求超时错误或其他Forest错误
-            log.error(ex.toString());
-            String msg="请求超时";
-            log.error(msg);
-            jsonObject.put("result", "fail");
-            jsonObject.put("msg", msg);
-            return jsonObject;
+            log.error(ex.getMessage());
+            return MyJson.error(MyError.超时);
         } catch (Exception ex) {
-            log.error(ex.toString());
-            String msg="未知异常,联系作者";
-            log.error(msg);
-            jsonObject.put("result", "fail");
-            jsonObject.put("msg", msg);
-            return jsonObject;
+            log.error(ex.getMessage());
+            return MyJson.error(MyError.未知错误);
         }
     }
 
-    public JSONObject select(String unionname, String markid) {
-        JSONObject response = new JSONObject();
+    public MyJson select(String unionname, String markid) {
+        JSONObject json = new JSONObject();
         try {
             Union union = unionDao.get(unionname);
             markid = markid.trim();
@@ -125,69 +108,23 @@ public class Servlet {
             JSONObject jsonObject1 = myClient.get(urls.审核包进度url(union.getUnionid(), markid), union.getCookie());
             //取出用户进度数组
             JSONArray records1 = jsonObject1.getJSONArray("records");
-
-            response.put("result", "success");
-            response.put("records", records1);
             tongjiDao.update("查询");
-            return response;
+            return MyJson.success(records1);
 
-        } catch (ForestHandlerException exception) {
+        } catch (ForestNetworkException exception) {
             //捕获cookie错误异常
-            log.error(exception.toString());
-            String msg="公会cookie失效";
-            response.put("result", "fail");
-            response.put("msg", msg);
-            return response;
-        }catch (ForestRuntimeException ex) {
-            //接收请求超时错误或其他Forest错误
-            log.error(ex.toString());
-            String msg="请求超时";
-            log.error(msg);
-            response.put("result", "fail");
-            response.put("msg", msg);
-            return response;
+            log.error(exception.getMessage());
+            return MyJson.error(MyError.公会cookie失效);
+        } catch (ForestRuntimeException ex) {
+            //超时异常
+            log.error(ex.getMessage());
+            return MyJson.error(MyError.超时);
         } catch (Exception ex) {
-            log.error(ex.toString());
-            String msg="未知异常,联系作者";
-            log.error(msg);
-            response.put("result", "fail");
-            response.put("msg", msg);
-            return response;
+            log.error(ex.getMessage());
+            return MyJson.error(MyError.未知错误);
         }
     }
 
-    public JSONObject useradd(String cookie) {
-        try {
-            //获取用户当前公会
-            JSONObject jsonObject = myClient.get(urls.用户信息url(), cookie);
-            String userName = jsonObject.getString("userName");
-            String userId = jsonObject.getString("userId");
-            User user = userDao.get(userName);
-            if (user != null) {
-                JSONObject jsonObject1 = new JSONObject();
-                jsonObject1.put("result", "fail");
-                jsonObject1.put("msg", "用户已存在");
-                return jsonObject1;
-            } else {
-                User user1 = new User();
-                user1.setUserid(userId);
-                user1.setUsername(userName);
-                user1.setCookie(cookie);
-                userDao.add(user1);
-                JSONObject jsonObject1 = new JSONObject();
-                jsonObject1.put("result", "success");
-                jsonObject1.put("username", userName);
-                return jsonObject1;
-            }
-
-        } catch (Exception a) {
-
-        }
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("result", "fail");
-        jsonObject1.put("msg", "cookie输入有误,无法获得用户信息，请重新输入");
-        return jsonObject1;
-    }
 
     @Async("doSomethingExecutor")
     public void 查询质检包(Union union) {

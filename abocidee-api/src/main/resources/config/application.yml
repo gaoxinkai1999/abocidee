@@ -6,12 +6,6 @@ spring:
     password: Gxk19990805
   redis:
     timeout: 5000
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://danpukj.com:3306
-#    username: oa_danpukj_com
-#    password: RaC8HPFiKciNkiyL
 
 logging:
   level:
@@ -29,6 +23,13 @@ forest:
   log-response-status: false
   ## 打开/关闭Forest响应内容日志（默认为 false）
   log-response-content: false
-  ##错误拦截器
-  interceptors: com.abocidee.newdemo.ErrorInterceptor
+
   timeout: 10000
+  # 全局自动重定向开关，默认为开启
+  auto-redirection: false
+  interceptors: # 可配置1到多个拦截器
+
+
+  # 通过 forest.success-when 属性配置全局请求成功/失败条件类
+  success-when:
+    com.abocidee.servlet.tools.MySuccessCondition

@@ -1,4 +1,4 @@
-package com.abocidee.newdemo.tools;
+package com.abocidee.servlet.tools;
 
 public class urls {
     public static String 用户信息url() {

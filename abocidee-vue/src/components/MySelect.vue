@@ -63,29 +63,29 @@ export default {
   },
   created() {
     this.$http({
-      url: 'getunion',
+      url: '/union/getAll',
       method: 'get'
 
     }).then(res => {
-      this.unions = res.data.unions
+      this.unions = res.data.data
     })
   },
   methods: {
     select() {
       console.log('开始查询')
       this.$http({
-        url: 'chaxun',
+        url: '/action/select',
         method: 'get',
         params: {
           'markid': this.formInline.markid,
           'unionname': this.formInline.union
         }
       }).then(res => {
-        if (res.data.msg === 'fail') {
-          this.error(res.data.text)
-        } else {
-          this.tableData = res.data.records
+        if (res.data.code === 0) {
+          this.tableData = res.data.data
           this.success()
+        } else {
+          this.error(res.data.msg)
         }
       })
     }
