@@ -3,6 +3,7 @@ package com.abocidee.servlet.tools;
 import lombok.Data;
 
 @Data
+
 public class MyJson
 {
     private static final int SUCCESS_CODE = 0;

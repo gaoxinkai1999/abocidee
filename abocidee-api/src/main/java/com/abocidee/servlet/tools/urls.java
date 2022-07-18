@@ -45,6 +45,9 @@ public class urls {
     public static final String 审核包进度url(String unionid, String mark_id) {
         return "https://test.baidu.com/mark/unionProject/getUnionTaskProcess/union_id/" + unionid + "/mark_id/" + mark_id + "/location/0/limit/100/tag//type/verify";
     }
-
+    //post
+    public static final String 移除成员url(){
+        return "https://test.baidu.com/crowdtest/n/union/opUnionUser";
+    }
 
 }

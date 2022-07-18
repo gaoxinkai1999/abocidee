@@ -1,7 +1,6 @@
 package com.abocidee.servlet.tools;
 
 
-
 public enum MyError
 {
     用户cookie失效( "用户cookie失效"),

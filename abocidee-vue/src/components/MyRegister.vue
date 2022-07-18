@@ -44,15 +44,16 @@ export default {
     register() {
       console.log('注册中')
       this.$http({
-        url: '注册',
+        url: '/user/add',
         method: 'get',
         params: {
           'cookie': this.cookie
         }
       }).then(res => {
-        console.log(res.data)
         if (res.data.code === 0) {
-          this.$emit('username', res.data.username)
+          this.$emit('username', res.data.data.username)
+        } else {
+          this.error(res.data.msg)
         }
       })
     },

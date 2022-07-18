@@ -80,10 +80,11 @@ public class UserServlet {
         return MyJson.error();
     }
 
-    public MyJson logout(String username, HttpServletResponse response) {
+    public MyJson logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("username", null);
         cookie.setMaxAge(0);
         cookie.setValue(null);
+        cookie.setPath("/");
         response.addCookie(cookie);
         return MyJson.success();
     }

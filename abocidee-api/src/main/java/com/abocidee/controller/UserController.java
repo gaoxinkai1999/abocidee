@@ -1,13 +1,12 @@
 package com.abocidee.controller;
 
 import com.abocidee.servlet.UserServlet;
-import com.abocidee.servlet.tools.MyJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.abocidee.servlet.tools.MyJson;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +18,7 @@ public class UserController {
     private UserServlet userServlet;
 
     @RequestMapping("/add")
-    public MyJson add(String cookie) {
+    public MyJson login(String cookie) {
         return userServlet.add(cookie);
     }
 
@@ -32,7 +31,7 @@ public class UserController {
     @RequestMapping("/logout")
     public MyJson logout(@CookieValue(value = "username",
             defaultValue = "null") String username, HttpServletResponse response) {
-        return userServlet.logout(username, response);
+        return userServlet.logout(response);
     }
 
     @RequestMapping("/check")

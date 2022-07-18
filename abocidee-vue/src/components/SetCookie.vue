@@ -21,14 +21,18 @@ export default {
     setCookie() {
       console.log('开始重置cookie')
       this.$http({
-        url: 'setcookie',
+        url: '/user/set',
         method: 'get',
         params: {
           'cookie': this.cookie
         }
 
       }).then(res => {
-        console.log('重置完成')
+        if (res.data.code === 0) {
+          this.success()
+        } else {
+          this.error(res.data.msg)
+        }
       })
     }
   }

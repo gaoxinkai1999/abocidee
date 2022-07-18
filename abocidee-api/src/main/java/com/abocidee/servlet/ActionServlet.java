@@ -126,6 +126,7 @@ public class ActionServlet {
     }
 
 
+
     @Async("doSomethingExecutor")
     public void 查询质检包(Union union) {
         System.out.println("查询质检包开始");
@@ -179,5 +180,7 @@ public class ActionServlet {
 
 
     }
+
+
 
 }

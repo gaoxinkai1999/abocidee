@@ -32,7 +32,7 @@ export default {
   methods: {
     exit() {
       this.$http({
-        url: '退出登录',
+        url: '/user/logout',
         method: 'get'
       }).then(res => {
         location.reload()
