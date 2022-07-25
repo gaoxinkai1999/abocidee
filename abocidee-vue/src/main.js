@@ -43,7 +43,10 @@ function endLoading() {
 
 // 请求数据拦截器
 axios.interceptors.request.use(request => {
-  startLoading()
+  if (request.headers.showLoading !== false) {
+    startLoading()
+  }
+
   return request
 }, err => {
   return Promise.reject(err)
@@ -51,7 +54,9 @@ axios.interceptors.request.use(request => {
 
 // 接收响应拦截器
 axios.interceptors.response.use(response => {
-  endLoading()
+  if (response.config.headers.showLoading !== false) {
+    endLoading()
+  }
   console.log(response.data)
 
   return response

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.annotation.DecompressGzip;
 import com.dtflys.forest.annotation.Post;
 import com.dtflys.forest.annotation.Request;
+import com.dtflys.forest.http.ForestResponse;
 import org.springframework.stereotype.Controller;
 
 import java.util.concurrent.Future;
@@ -90,4 +91,29 @@ public interface MyClient {
     )
     JSONObject get(String url);
 
+    @Request(
+            url = "{0}",
+//            dataType = "json",
+            headers = {"Accept: text/plain",
+
+            },
+            data = "{1}"
+    )
+    String demoget(String url,String data);
+
+    @Request(
+            url = "{0}",
+//            dataType = "json",
+            headers = {"Accept: text/plain",
+            }
+    )
+    ForestResponse responseget(String url);
+    @Request(
+            url = "{0}",
+            dataType = "json",
+            headers = {"Accept: text/plain",
+
+                    "Cookie:BDUSS={1}"}
+    )
+    String Stringget(String url, String cookie);
 }

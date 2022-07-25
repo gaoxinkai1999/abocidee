@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 //解决跨域
-//@CrossOrigin
-//@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/action")
 @Slf4j

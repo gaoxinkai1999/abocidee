@@ -93,6 +93,7 @@ public class UserServlet {
         User user = userDao.get(username);
         if (user != null) {
             Cookie cookie = new Cookie("username", user.getUsername());
+
             cookie.setMaxAge(60 * 60 * 24 * 365);
             cookie.setPath("/");
             response.addCookie(cookie);

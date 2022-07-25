@@ -40,7 +40,13 @@ public class MyJson
         MyJson.setMsg(msg);
         return MyJson;
     }
-
+    public static MyJson success(String msg,Object data)
+    {
+        MyJson MyJson = new MyJson();
+        MyJson.setMsg(msg);
+        MyJson.setData(data);
+        return MyJson;
+    }
 
     public static MyJson error(MyError myerror)
     {
