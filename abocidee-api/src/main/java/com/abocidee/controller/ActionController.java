@@ -6,12 +6,12 @@ import com.abocidee.servlet.tools.MyJson;
 import com.abocidee.servlet.tools.当前时间;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 
-//解决跨域
-@CrossOrigin
 @RestController
 @RequestMapping("/action")
 @Slf4j
@@ -20,30 +20,20 @@ public class ActionController {
     private ActionServlet actionServlet;
 
     @RequestMapping(value = "/move")
-    public MyJson move(@CookieValue(value = "username",
-            defaultValue = "null") String username, String unionname,Boolean onlyexit) {
-        if (username.equals("null")) {
+    public MyJson move(@CookieValue(value = "username") String username, String unionname, Boolean onlyexit) {
 
-        } else {
-            log.info(当前时间.get() + "\t" + username + "\t转会到\t" + unionname);
-            return actionServlet.move(username, unionname,onlyexit);
-        }
+        log.info(当前时间.get() + "\t" + username + "\t转会到\t" + unionname);
+        return actionServlet.move(username, unionname, onlyexit);
 
-        return null;
     }
 
     @RequestMapping(value = "/select")
-    public MyJson select(@CookieValue(value = "username",
-            defaultValue = "null") String username, String unionname, String markid) {
-        if (!username.equals("null")) {
+    public MyJson select(@CookieValue(value = "username") String username, String unionname, String markid) {
 
+        log.info(当前时间.get() + "\t" + username + "\t查询\t" + unionname + "\t" + markid);
+        MyJson result = actionServlet.select(unionname, markid);
+        return result;
 
-            log.info(当前时间.get() + "\t" + username + "\t查询\t" + unionname + "\t" + markid);
-            MyJson result = actionServlet.select(unionname, markid);
-            return result;
-        }
-
-        return null;
     }
 
 

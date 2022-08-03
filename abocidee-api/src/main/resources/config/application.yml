@@ -4,6 +4,7 @@ spring:
     url: jdbc:mysql://rm-bp1eezv271x2qwencao.mysql.rds.aliyuncs.com:3306
     username: gxk
     password: Gxk19990805
+    type: com.alibaba.druid.pool.DruidDataSource
   redis:
     timeout: 5000
 

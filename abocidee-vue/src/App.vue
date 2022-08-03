@@ -34,14 +34,14 @@ import MyRegister from './components/MyRegister'
 
 export default {
   name: 'App',
-  data() {
+  data () {
     return {
       name: 'Hello World',
       value1: true,
       username: ''
     }
   },
-  created() {
+  created () {
     this.$http({
       url: '/user/check',
       method: 'get'
@@ -53,10 +53,10 @@ export default {
     })
   },
   methods: {
-    getusername(val) {
+    getusername (val) {
       this.username = val
     },
-    success(message) {
+    success (message) {
       this.$notify({
         title: '成功',
         message: message,
@@ -64,7 +64,7 @@ export default {
         duration: 10000
       })
     },
-    error(message) {
+    error (message) {
       this.$notify.error({
         title: '错误',
         message: message,

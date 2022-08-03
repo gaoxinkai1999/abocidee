@@ -17,14 +17,14 @@
 
 export default {
   name: 'caidan',
-  data() {
+  data () {
     return {
       // 当前要渲染的组件名称
       comName: 'MyMove'
     }
   },
   methods: {
-    handleSelect(key, keyPath) {
+    handleSelect (key, keyPath) {
     }
 
   }

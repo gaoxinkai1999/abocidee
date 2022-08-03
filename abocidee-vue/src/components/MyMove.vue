@@ -13,13 +13,13 @@
 <script>
 export default {
   name: 'MyMove',
-  data() {
+  data () {
     return {
       unions: ''
     }
   },
   methods: {
-    move(union, onlyexit) {
+    move (union, onlyexit) {
       this.$http({
         url: '/action/move',
         method: 'get',
@@ -36,7 +36,7 @@ export default {
       })
     }
   },
-  created() {
+  created () {
     this.$http({
       url: '/union/getAll',
       method: 'get'

@@ -1,9 +1,8 @@
 package com.abocidee.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 
-@Configuration
+//@Configuration
 public class CrossDomainConfig {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();

@@ -1,4 +1,4 @@
-package com.abocidee.servlet.tools;
+package com.abocidee.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

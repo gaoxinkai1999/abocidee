@@ -24,13 +24,13 @@ import SetCookie from './SetCookie'
 
 export default {
   name: 'MyHome',
-  data() {
+  data () {
     return {
       isshowcookie: false
     }
   },
   methods: {
-    exit() {
+    exit () {
       this.$http({
         url: '/user/logout',
         method: 'get'
@@ -39,14 +39,14 @@ export default {
       })
     }
   },
-  created() {
+  created () {
   },
   props: ['username'],
   components: {
     SetCookie
   },
   // 在keepalive下保持数据更新
-  activated() {
+  activated () {
     console.log('渲染中')
   }
 }

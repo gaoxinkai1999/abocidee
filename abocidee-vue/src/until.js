@@ -1,4 +1,4 @@
-export function success(message) {
+export function success (message) {
   this.$notify({
     title: '成功',
     message: message,
@@ -7,7 +7,7 @@ export function success(message) {
   })
 }
 
-export function error(message) {
+export function error (message) {
   this.$notify.error({
     title: '错误',
     message: message,

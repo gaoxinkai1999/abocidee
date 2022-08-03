@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'MyQrcode',
-  data() {
+  data () {
     return {
       imgurl: null,
       isshow: false,
@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    getimgurl() {
+    getimgurl () {
       this.$http({
         url: '/getimg',
         method: 'get'
@@ -33,7 +33,7 @@ export default {
         }
       })
     },
-    checkstate(sign, time) {
+    checkstate (sign, time) {
       this.$http({
         url: '/checkstate',
         method: 'get',

@@ -11,8 +11,8 @@ import {error, success} from './until'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
-axios.defaults.baseURL = 'http://124.223.48.47:8080'
-// axios.defaults.baseURL = 'http://localhost:8080'
+// axios.defaults.baseURL = 'http://124.223.48.47:8080'
+axios.defaults.baseURL = 'http://localhost:8080'
 axios.defaults.withCredentials = true // 让ajax携带cookie
 Vue.prototype.$http = axios
 Vue.prototype.success = success
@@ -21,7 +21,7 @@ let loading
 // 内存中正在请求的数量
 let loadingNum = 0
 
-function startLoading() {
+function startLoading () {
   if (loadingNum === 0) {
     loading = Loading.service({
       lock: true,
@@ -33,7 +33,7 @@ function startLoading() {
   loadingNum++
 }
 
-function endLoading() {
+function endLoading () {
   // 请求数量减1
   loadingNum--
   if (loadingNum <= 0) {

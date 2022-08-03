@@ -19,7 +19,7 @@
 
 export default {
   name: 'MyRegister',
-  data() {
+  data () {
     return {
       cookie: '',
       // 控制弹窗
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    register() {
+    register () {
       console.log('注册中')
       this.$http({
         url: '/user/add',
@@ -47,10 +47,10 @@ export default {
         }
       })
     },
-    getimgurl() {
+    getimgurl () {
       this.dialogVisible = true
       this.$http({
-        url: '/getimg',
+        url: '/qrcode/getimg',
         method: 'get'
       }).then(res => {
         if (res.data.code === 0) {
@@ -63,9 +63,9 @@ export default {
         }
       })
     },
-    checkstate(sign, time) {
+    checkstate (sign, time) {
       this.$http({
-        url: '/checkstate',
+        url: '/qrcode/checkstate',
         method: 'get',
         params: {
           'sign': sign,

@@ -4,14 +4,12 @@ import com.abocidee.servlet.UnionServlet;
 import com.abocidee.servlet.tools.MyJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/union")
 @Slf4j
-@CrossOrigin
 public class UnionController {
     @Autowired
     private UnionServlet unionServlet;

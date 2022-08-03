@@ -10,13 +10,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.exceptions.ForestNetworkException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
+@Service
 @Slf4j
 public class UserServlet {
     @Autowired

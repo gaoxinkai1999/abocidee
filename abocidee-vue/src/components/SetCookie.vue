@@ -17,7 +17,7 @@
 <script>
 export default {
   name: 'SetCookie',
-  data() {
+  data () {
     return {
       cookie: '',
       url: '',
@@ -27,7 +27,7 @@ export default {
     }
   },
   methods: {
-    setCookie() {
+    setCookie () {
       console.log('开始重置cookie')
       this.$http({
         url: '/user/set',
@@ -44,10 +44,10 @@ export default {
         }
       })
     },
-    getimgurl() {
+    getimgurl () {
       this.dialogVisible = true
       this.$http({
-        url: '/getimg',
+        url: '/qrcode/getimg',
         method: 'get'
       }).then(res => {
         if (res.data.code === 0) {
@@ -60,9 +60,9 @@ export default {
         }
       })
     },
-    checkstate(sign, time) {
+    checkstate (sign, time) {
       this.$http({
-        url: '/checkstate',
+        url: '/qrcode/checkstate',
         method: 'get',
         params: {
           'sign': sign,

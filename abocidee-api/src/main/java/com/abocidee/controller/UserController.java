@@ -1,20 +1,19 @@
 package com.abocidee.controller;
 
 import com.abocidee.servlet.UserServlet;
+import com.abocidee.servlet.tools.MyJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.abocidee.servlet.tools.MyJson;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/user")
 @Slf4j
-@CrossOrigin(maxAge = 100000)
 public class UserController {
     @Autowired
     private UserServlet userServlet;

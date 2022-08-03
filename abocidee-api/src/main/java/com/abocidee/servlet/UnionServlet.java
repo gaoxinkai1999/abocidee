@@ -9,11 +9,11 @@ import com.abocidee.servlet.tools.urls;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.exceptions.ForestNetworkException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-@Component
+@Service
 public class UnionServlet {
     @Autowired
     private UnionDao unionDao;

@@ -37,7 +37,7 @@
 <script>
 export default {
   name: 'MyManage',
-  data() {
+  data () {
     return {
       cookie: '',
       unionname: '',
@@ -47,7 +47,7 @@ export default {
     }
   },
   methods: {
-    add() {
+    add () {
       this.$http({
         url: '/union/add',
         method: 'get',
@@ -63,7 +63,7 @@ export default {
         }
       })
     },
-    set() {
+    set () {
       this.$http({
         url: '/union/set',
         method: 'get',
@@ -80,7 +80,7 @@ export default {
       })
     }
   },
-  created() {
+  created () {
     this.$http({
       url: '/union/getAll',
       method: 'get'

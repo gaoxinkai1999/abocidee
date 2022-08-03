@@ -12,13 +12,13 @@
 
 export default {
   name: 'MyLogin',
-  data() {
+  data () {
     return {
       username: ''
     }
   },
   methods: {
-    login() {
+    login () {
       console.log('登录中')
       this.$http({
         url: '/user/login',

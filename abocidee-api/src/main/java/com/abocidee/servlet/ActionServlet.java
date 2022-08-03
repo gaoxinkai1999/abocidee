@@ -19,12 +19,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
 @Slf4j
-@Component
+@Service
 public class ActionServlet {
     @Autowired
     private MyClient myClient;

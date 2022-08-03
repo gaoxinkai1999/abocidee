@@ -51,7 +51,7 @@
 
 export default {
   name: 'MySelect',
-  data() {
+  data () {
     return {
       formInline: {
         markid: '',
@@ -61,7 +61,7 @@ export default {
       tableData: []
     }
   },
-  created() {
+  created () {
     this.$http({
       url: '/union/getAll',
       method: 'get'
@@ -71,7 +71,7 @@ export default {
     })
   },
   methods: {
-    select() {
+    select () {
       console.log('开始查询')
       this.$http({
         url: '/action/select',
